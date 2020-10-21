@@ -32,13 +32,13 @@ exports.getLoginPage = (req,res) => {
   res.render('admin/login.ejs')
 }
 exports.getNavMenusPage = (req,res) => {
-  res.render('admin/nav_menus.ejs')
+  res.render('admin/nav-menus.ejs')
 }
 exports.getPasswordResetPage = (req,res) => {
-  res.render('admin/password_reset.ejs')
+  res.render('admin/password-reset.ejs')
 }
 exports.getPostAddPage = (req,res) => {
-  res.render('admin/post_add.ejs')
+  res.render('admin/post-add.ejs')
 }
 exports.getPostsPage = (req,res) => {
   res.render('admin/posts.ejs')

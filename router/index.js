@@ -16,4 +16,17 @@ router.get('/',pagesController.getIndexPage)
       .get('/detail',pagesController.getDetailPage)
 // 读取后台页面
       .get('/admin',pagesController.getAdminIndexPage)
+      .get('/admin/categories',pagesController.getCategoriesPage)
+      .get('/admin/comments',pagesController.getCommentsPage)
+      .get('/admin/login',pagesController.getLoginPage)
+      .get('/admin/nav-menus',pagesController.getNavMenusPage)
+      .get('/admin/password-reset',pagesController.getPasswordResetPage)
+      .get('/admin/post-add',pagesController.getPostAddPage)
+      .get('/admin/posts',pagesController.getPostsPage)
+      .get('/admin/profile',pagesController.getProfilePage)
+      .get('/admin/settings',pagesController.getSettingsPage)
+      .get('/admin/slides',pagesController.getSlidesPage)
+      .get('/admin/users',pagesController.getUsersPage)
+
+
 module.exports = router
