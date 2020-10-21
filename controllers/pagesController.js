@@ -22,3 +22,36 @@ module.exports.getDetailPage = (req,res) => {
 module.exports.getAdminIndexPage = (req,res) => {
   res.render('admin/index.ejs')
 }
+exports.getCategoriesPage = (req,res) => {
+  res.render('admin/categories.ejs')
+}
+exports.getCommentsPage = (req,res) => {
+  res.render('admin/comments.ejs')
+}
+exports.getLoginPage = (req,res) => {
+  res.render('admin/login.ejs')
+}
+exports.getNavMenusPage = (req,res) => {
+  res.render('admin/nav_menus.ejs')
+}
+exports.getPasswordResetPage = (req,res) => {
+  res.render('admin/password_reset.ejs')
+}
+exports.getPostAddPage = (req,res) => {
+  res.render('admin/post_add.ejs')
+}
+exports.getPostsPage = (req,res) => {
+  res.render('admin/posts.ejs')
+}
+exports.getProfilePage = (req,res) => {
+  res.render('admin/profile.ejs')
+}
+exports.getSettingsPage = (req,res) => {
+  res.render('admin/settings.ejs')
+}
+exports.getSlidesPage = (req,res) => {
+  res.render('admin/slides.ejs')
+}
+exports.getUsersPage = (req,res) => {
+  res.render('admin/users.ejs')
+}
