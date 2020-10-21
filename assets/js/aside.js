@@ -1,15 +1,6 @@
 $(function(){
   // 1.获取当前页面路由
-  var href = location.href
-  // 判断路径是否带有参数
-  var index = href.indexOf('?')
-  // 定义一个变量用来储存路由名称
-  var routerName = ''
-  if (index === -1) {
-    routerName = href.slice(href.lastIndexOf('/')+1)
-  } else {
-    routerName = href.slice(href.lastIndexOf('/')+1,href.indexOf('?'))
-  }
+  var routerName = common.getRouterName(location.href) 
   // alert(routerName)
   // 根据路由判断菜单项是否展开和合并
   if (routerName === 'posts' || routerName === 'post-add' || routerName === 'categories') {
