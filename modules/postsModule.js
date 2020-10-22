@@ -1,6 +1,7 @@
 // posts表的数据处理操作
 
 // 引入mysql
+const { query } = require('express')
 var mysql = require('mysql')
 // 创建连接
 var connection = mysql.createConnection({
@@ -16,16 +17,27 @@ var connection = mysql.createConnection({
 /* params:
 pagenum: 当前页码
 pagesize: 每页条数
-query: 查找参数
+query: 用户搜索条件  query.cate: 分类条件  query.statu: 状态条件  后台最大,后台约定query是一个对象.里面有两个参数cate和statu
 */
 exports.getPostList = (params,callback) =>{
   // 创建sql语句
   var sql = `select posts.id,posts.slug,posts.title,posts.feature,posts.created,posts.content,posts.status,users.id,users.nickname,categories.name
             from posts
             inner join users on posts.user_id = users.id
-            inner join categories on posts.category_id = categories.id `
+            inner join categories on posts.category_id = categories.id
+            where 1=1 `
             // 在这里可以通过判断页面结构来选择是否拼接筛选条件,
             // 下面的order前面要加空格,否者会与上面的id相连变成idorder,最好是在id后也加一个空格
+            if (params.query.cate) {
+              // 拼接分类条件
+              sql += ` and posts.categories_id = ${params.query.cate}`
+            }
+            if (params.query.statu) {
+              // 拼接状态条件
+              sql += ` and posts.status = '${params.query.statu}'`
+            }
+
+
             sql += ` order by posts.id desc
             limit ${(params.pagenum-1)*params.pagesize},${params.pagesize}`
 // 查询数据库
