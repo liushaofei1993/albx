@@ -1,7 +1,6 @@
 // posts表的数据处理操作
 
 // 引入mysql
-const { query } = require('express')
 var mysql = require('mysql')
 // 创建连接
 var connection = mysql.createConnection({
@@ -30,7 +29,7 @@ exports.getPostList = (params,callback) =>{
             // 下面的order前面要加空格,否者会与上面的id相连变成idorder,最好是在id后也加一个空格
             if (params.query.cate) {
               // 拼接分类条件
-              sql += ` and posts.categories_id = ${params.query.cate}`
+              sql += ` and posts.category_id = ${params.query.cate}`
             }
             if (params.query.statu) {
               // 拼接状态条件

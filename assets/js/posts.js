@@ -4,6 +4,23 @@ $(function() {
   var pagesize = 2
   // 发起请求,获取文章数据
   init();
+
+  // 实现文章数据的筛选
+  $('.btn-search').on('click',function (e) {
+    // 阻止默认行为
+    e.preventDefault()
+    // 重点是获取用户数据
+    var query = {}
+    // 判断用户有没有选择指定的筛选条件
+    if ($('.cateSelector').val() !== 'all') {
+      query.cate = $('.cateSelector').val() 
+    }
+    if ($('.statuSelector').val() !== 'all') {
+      query.statu = $('.statuSelector').val()
+    }
+    console.log(query)
+  });
+
   // 使用自调用函数实现分类数据的动态加载
   (function() {
     $.ajax({
@@ -28,7 +45,12 @@ $(function() {
       url: '/getPostList',
       data: {
         pagenum: pagenum,
-        pagesize: pagesize
+        pagesize: pagesize,
+        // 在向后台传递参数时,body-parser 中间件会把参数(值为undefind的)query过滤掉,导致后台接收不到query参数,那么在使用参数中的cate和statu属性的时候后台会报错,下面是解决方法,不可以写-- |  query:{}  |
+        query: {
+          cate:'',
+          statu: ''
+        }
       },
       dataType: 'json',
       success: function (res) {
