@@ -12,7 +12,6 @@ var connection = mysql.createConnection({
 })
 // 打开连接--不用写,默认找到最新创建的连接来使用
 
-// 获取所有文章数据
 /* params:
 pagenum: 当前页码
 pagesize: 每页条数
@@ -21,6 +20,8 @@ query: 用户搜索条件  query.cate: 分类条件  query.statu: 状态条件  
 解决方案: 约定params有四个属性: pagenum,pagesize,[cate,statu](不是必需的)
          访问一个对象不存在的属性,不会报错,会返回undefined,正适合用于判断
 */
+
+// 获取所有文章数据
 exports.getPostList = (params,callback) =>{
   // 创建sql语句
   var sql = `select posts.id,posts.slug,posts.title,posts.feature,posts.created,posts.content,posts.status,users.id,users.nickname,categories.name
@@ -59,4 +60,16 @@ connection.query(sql,(err,results) => {
     })
   }
 })
+}
+
+// 根据文章id删除文章
+exports.delPostById = (id,callback) => {
+  var sql = 'delete from posts where id = ' + id
+  connection.query(sql,(err,results) =>{
+    if(err) {
+      callback(err)
+    } else {
+      callback(null)
+    }
+  })
 }
