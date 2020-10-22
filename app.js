@@ -2,6 +2,8 @@
 const express = require ('express')
 // 引入ejs
 const ejs = require('ejs')
+// 引入body-parser
+var bodyParser = require('body-parser')
 // 引入路由模块
 const router = require ('./router')
 // 2.创建应用
@@ -14,6 +16,9 @@ app.listen(3000,() =>{
 app.set('view engine','ejs')
 // 设置ejs所在的页面目录
 app.set('views','./views')
+// 添加body-parser的配置
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 // 4.添加静态资源托管
 app.use('/assets',express.static('assets'))
 app.use('/uploads', express.static('uploads'))

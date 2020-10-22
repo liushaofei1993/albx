@@ -3,9 +3,11 @@ var postsModule = require('../modules/postsModule.js')
 // 引入moment
 // var moment = require('moment')
 exports.getPostList = (req,res) =>{
+  // 获取分页参数
+  var obj = req.query 
   // 获取所有文章列表并返回
   // 调用数据模块获取数据
-  postsModule.getPostList((err,data) => {
+  postsModule.getPostList(obj,(err,data) => {
     if (err) {
       res.json({
         code:400,
