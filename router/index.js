@@ -5,6 +5,7 @@ const express = require('express')
 const pagesController = require('../controllers/pagesController.js')
 // 引入文章的控制器模块
 const postsController = require('../controllers/postsController.js')
+const cateController = require('../controllers/cateController.js')
 // 创建路由中间件
 const router = express.Router()
 // 使用路由中间件
@@ -31,8 +32,10 @@ router.get('/',pagesController.getIndexPage)
       .get('/admin/users',pagesController.getUsersPage)
 
       // 业务处理
-      // 获取所有文章数据
+      // 1.获取所有文章数据
       .get('/getPostList',postsController.getPostList)
 
+      // 2.获取所有分类数据
+      .get('/getAllCateList',cateController.getAllCateList)
 
 module.exports = router
