@@ -3,7 +3,7 @@ var postsModule = require('../modules/postsModule.js')
 // 引入moment
 // var moment = require('moment')
 exports.getPostList = (req,res) =>{
-  // 获取分页参数
+  // 获取分页参数: 因为已经在app.js中引入加配置,所以可以使用下面的方法,这是get请求的方法,post请求时用req.body
   var obj = req.query 
   // 获取所有文章列表并返回
   // 调用数据模块获取数据

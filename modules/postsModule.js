@@ -1,3 +1,5 @@
+// posts表的数据处理操作
+
 // 引入mysql
 var mysql = require('mysql')
 // 创建连接
