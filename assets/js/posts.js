@@ -3,7 +3,24 @@ $(function() {
   var pagenum = 1
   var pagesize = 2
   // 发起请求,获取文章数据
-  init()
+  init();
+  // 使用自调用函数实现分类数据的动态加载
+  (function() {
+    $.ajax({
+      type: 'get',
+      url: '/getAllCateList',
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+        var html = `<option value="all">所有分类</option>`
+        for(var i=0;i<res.data.length;i++){
+          html += `<option value="${res.data[i].id}">${res.data[i].name}</option>`
+        }
+        $('.cateSelector').html(html)
+      }
+    })
+  })()
+
   // 数据初始化
   function init () {
     $.ajax({
@@ -13,7 +30,7 @@ $(function() {
         pagenum: pagenum,
         pagesize: pagesize
       },
-      datatype: 'json',
+      dataType: 'json',
       success: function (res) {
         console.log(res)
         // 渲染文章列表数据
