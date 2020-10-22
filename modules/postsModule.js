@@ -30,7 +30,16 @@ connection.query(sql,(err,results) => {
   if (err) {
     callback(err)
   } else {
-    callback(null,results)
+    // 这个语句是为了获取当前表的总记录数
+    var sql = `select count(*) as cnt from posts`
+    connection.query(sql,(err1,data1) =>{
+      if(err1) {
+        callback (err1)
+      } else {
+        // 我们既需要返回数据,又需要返回总记录数
+        callback(null,{data:results,total:data1[0].cnt})
+      }
+    })
   }
 })
 }

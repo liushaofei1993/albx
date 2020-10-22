@@ -19,6 +19,7 @@ exports.getPostList = (req,res) =>{
       //   // moment中的参数就是你想转换的日期值,如果没有写,就默认获取当前的日期值进行转换
       //   data[i].created = moment(data[i].created).format('YYYY-MM-DD HH:mm:ss')
       // }
+      // console.log(data)
       res.json({
         code: 200,
         msg: '数据查询成功',
