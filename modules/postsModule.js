@@ -16,7 +16,10 @@ var connection = mysql.createConnection({
 /* params:
 pagenum: 当前页码
 pagesize: 每页条数
-query: 用户搜索条件  query.cate: 分类条件  query.statu: 状态条件  后台最大,后台约定query是一个对象.里面有两个参数cate和statu
+query: 用户搜索条件  query.cate: 分类条件  query.statu: 状态条件  后台最大,后台约定query是一个对象,里面有两个参数cate和statu
+经过测试: -----([这里不能传递一个对象,应该传递一个变量])-----上面这种,定义query为一个对象不可行,在下面判断params.query.cate时会报错,由于:对象.属性(不存在的)会返回一个undefined,在undefined基础上再去使用未定义的cate属性自然会报错
+解决方案: 约定params有四个属性: pagenum,pagesize,[cate,statu](不是必需的)
+         访问一个对象不存在的属性,不会报错,会返回undefined,正适合用于判断
 */
 exports.getPostList = (params,callback) =>{
   // 创建sql语句
@@ -27,13 +30,13 @@ exports.getPostList = (params,callback) =>{
             where 1=1 `
             // 在这里可以通过判断页面结构来选择是否拼接筛选条件,
             // 下面的order前面要加空格,否者会与上面的id相连变成idorder,最好是在id后也加一个空格
-            if (params.query.cate) {
+            if (params.cate) {
               // 拼接分类条件
-              sql += ` and posts.category_id = ${params.query.cate}`
+              sql += ` and posts.category_id = ${params.cate}`
             }
-            if (params.query.statu) {
+            if (params.statu) {
               // 拼接状态条件
-              sql += ` and posts.status = '${params.query.statu}'`
+              sql += ` and posts.status = '${params.statu}'`
             }
 
 

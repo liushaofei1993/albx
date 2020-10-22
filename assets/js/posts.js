@@ -3,7 +3,7 @@ $(function() {
   var pagenum = 1
   var pagesize = 2
   // 发起请求,获取文章数据
-  init();
+  init({});
 
   // 实现文章数据的筛选
   $('.btn-search').on('click',function (e) {
@@ -19,6 +19,7 @@ $(function() {
       query.statu = $('.statuSelector').val()
     }
     console.log(query)
+    init(query)
   });
 
   // 使用自调用函数实现分类数据的动态加载
@@ -39,18 +40,16 @@ $(function() {
   })()
 
   // 数据初始化
-  function init () {
+  function init (query) {
     $.ajax({
       type: 'get',
       url: '/getPostList',
       data: {
         pagenum: pagenum,
         pagesize: pagesize,
-        // 在向后台传递参数时,body-parser 中间件会把参数(值为undefind的)query过滤掉,导致后台接收不到query参数,那么在使用参数中的cate和statu属性的时候后台会报错,下面是解决方法,不可以写-- |  query:{}  |
-        query: {
-          cate:'',
-          statu: ''
-        }
+        // 在向后台传递参数时,body-parser 中间件会把(值为undefined的)参数query过滤掉,导致后台接收不到query参数,那么在使用参数中的cate和statu属性的时候后台会报错,修改了后台postsModule之后,就不再使用query了,而是直接使用两个变量cate和statu
+        // 扩展运算符: 结果与cate:值,statu:值类似
+        ...query
       },
       dataType: 'json',
       success: function (res) {
@@ -79,7 +78,7 @@ $(function() {
         // 当前页码点击变化时,page就是当前页码值,将全局变量pagenum重置为page,在重新发请求取数据渲染即可,最好是封装一下请求文章的ajax请求
         pagenum = page
         // 重新获取数据
-        init()
+        init({})
       }
     })
   }
