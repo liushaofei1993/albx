@@ -23,7 +23,10 @@ exports.getPostList = (params,callback) =>{
   var sql = `select posts.id,posts.slug,posts.title,posts.feature,posts.created,posts.content,posts.status,users.id,users.nickname,categories.name
             from posts
             inner join users on posts.user_id = users.id
-            inner join categories on posts.category_id = categories.id
+            inner join categories on posts.category_id = categories.id `
+            // 在这里可以通过判断页面结构来选择是否拼接筛选条件,
+            // 下面的order前面要加空格,否者会与上面的id相连变成idorder,最好是在id后也加一个空格
+            sql += ` order by posts.id desc
             limit ${(params.pagenum-1)*params.pagesize},${params.pagesize}`
 // 查询数据库
 connection.query(sql,(err,results) => {
