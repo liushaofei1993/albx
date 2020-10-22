@@ -64,7 +64,13 @@
       <td>{{value.nickname}}</td>
       <td>{{value.name}}</td>
       <td class="text-center">{{value.created}}</td>
-      <td class="text-center">{{value.status}}</td>
+      <td class="text-center">
+        {{if value.status === 'published'}}
+        已发布
+        {{else}}
+        草稿
+        {{/if}}
+      </td>
       <td class="text-center">
         <a href="javascript:;" class="btn btn-default btn-xs">编辑</a>
         <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
