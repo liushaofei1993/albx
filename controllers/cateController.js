@@ -2,6 +2,7 @@
 
 var cateModule = require('../modules/cateModule.js')
 
+// 获取所有分类数据
 exports.getAllCateList = (req,res) => {
   cateModule.getAllCateList((err,data) =>{
     if(err) {
