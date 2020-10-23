@@ -67,7 +67,8 @@
       </td>
       <td class="text-center">
         <a href="javascript:;" class="btn btn-default btn-xs">编辑</a>
-        <a href="javascript:;" class="btn btn-danger btn-xs btnDel">删除</a>
+        <!-- 后台查询语句中有同名字段,需要修改别名,否则前台不同文章数据的自定义属性的id值会相同,自定义属性的id值不能使用id,应该使用后台查询时的别名pid -->
+        <a href="javascript:;" class="btn btn-danger btn-xs btnDel" data-id="{{value.pid}}">删除</a>
         <!-- <a href="javascript:;" class="btn btn-danger btn-xs btnDel" onclick="delPost({{value.id}})">删除</a> -->
       </td>
     </tr>

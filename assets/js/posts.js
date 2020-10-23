@@ -3,9 +3,7 @@ $(function() {
   var pagenum = 1
   var pagesize = 2
   // 发起请求,获取文章数据
-  init({});
-
-
+  init({}); 
 
   // 实现文章数据的筛选
   $('.btn-search').on('click',function (e) {
@@ -85,6 +83,10 @@ $(function() {
       }
     })
   }
+    // 使用事件委托的方式实现文章的删除
+    $('tbody').on('click','.btnDel',function() {
+      console.log($(this).data())
+    })
 })
 
   // 根据id实现文章的删除

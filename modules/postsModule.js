@@ -24,7 +24,7 @@ query: 用户搜索条件  query.cate: 分类条件  query.statu: 状态条件  
 // 获取所有文章数据
 exports.getPostList = (params,callback) =>{
   // 创建sql语句
-  var sql = `select posts.id,posts.slug,posts.title,posts.feature,posts.created,posts.content,posts.status,users.id,users.nickname,categories.name
+  var sql = `select posts.id pid,posts.slug,posts.title,posts.feature,posts.created,posts.content,posts.status,users.id uid,users.nickname,categories.name
             from posts
             inner join users on posts.user_id = users.id
             inner join categories on posts.category_id = categories.id
@@ -48,6 +48,7 @@ connection.query(sql,(err,results) => {
   if (err) {
     callback(err)
   } else {
+    console.log(results)
     // 这个语句是为了获取当前表的总记录数
     var sql = `select count(*) as cnt from posts`
     connection.query(sql,(err1,data1) =>{
