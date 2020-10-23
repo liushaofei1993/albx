@@ -7,6 +7,7 @@ const pagesController = require('../controllers/pagesController.js')
 const postsController = require('../controllers/postsController.js')
 const cateController = require('../controllers/cateController.js')
 const uploadController = require('../controllers/uploadController.js')
+const userController = require('../controllers/userController.js')
 // 创建路由中间件
 const router = express.Router()
 // 使用路由中间件
@@ -43,5 +44,8 @@ router.get('/',pagesController.getIndexPage)
 
       // 3.文件上传
       .post('/uploadFile',uploadController.uploadFile)
+
+      // 4.用户登录
+      .post('/login',userController.login)
 
 module.exports = router
