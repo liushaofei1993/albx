@@ -6,6 +6,7 @@ const pagesController = require('../controllers/pagesController.js')
 // 引入文章的控制器模块
 const postsController = require('../controllers/postsController.js')
 const cateController = require('../controllers/cateController.js')
+const uploadController = require('../controllers/uploadController.js')
 // 创建路由中间件
 const router = express.Router()
 // 使用路由中间件
@@ -38,5 +39,8 @@ router.get('/',pagesController.getIndexPage)
 
       // 2.获取所有分类数据
       .get('/getAllCateList',cateController.getAllCateList)
+
+      // 3.文件上传
+      .get('/uploadFile',uploadController.uploadFile)
 
 module.exports = router
