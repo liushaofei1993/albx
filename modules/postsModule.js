@@ -48,7 +48,7 @@ connection.query(sql,(err,results) => {
   if (err) {
     callback(err)
   } else {
-    console.log(results)
+    // console.log(results)
     // 这个语句是为了获取当前表的总记录数
     var sql = `select count(*) as cnt from posts`
     connection.query(sql,(err1,data1) =>{

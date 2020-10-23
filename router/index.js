@@ -41,6 +41,6 @@ router.get('/',pagesController.getIndexPage)
       .get('/getAllCateList',cateController.getAllCateList)
 
       // 3.文件上传
-      .get('/uploadFile',uploadController.uploadFile)
+      .post('/uploadFile',uploadController.uploadFile)
 
 module.exports = router

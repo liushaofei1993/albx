@@ -18,7 +18,7 @@ $(function () {
   CKEDITOR.replace( 'content' )
 
   // 获取表单数据,添加文章
-  $('.btnAdd').on('click',function(e) {
+  $('.btnSave').on('click',function(e) {
     e.preventDefault()
 
     // 获取富文本框的值: 有两种方式: 第一种推荐,第二种需要和serialize拼接,数据多了,拼接就非常麻烦!
@@ -34,5 +34,27 @@ $(function () {
   })
 
   // 文件上传
-  
+  $('#feature').on('change',function () {
+    // console.log(document.querySelector('#feature').files[0])
+    // 获取当前被选中的文件对象
+    var myfile = document.querySelector('#feature').files[0]
+    // 使用formdata的方式作为数据发送ajax请求
+    // 创建formdata
+    var formdata = new FormData()
+    // 追加参数
+    formdata.append('img',myfile)
+    // formdata.append('hello','nihao')
+    // 发送请求,上传文件
+    $.ajax({
+      type: 'post',
+      url: '/uploadFile',
+      data: formdata,
+      processData: false,   // 不让ajax进行数据的处理,formdata会进行处理, 
+      contentType: false,   // 不让ajax进行数据的编码,formdata会进行处理
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  })
 })
