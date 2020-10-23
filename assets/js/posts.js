@@ -86,6 +86,15 @@ $(function() {
     // 使用事件委托的方式实现文章的删除
     $('tbody').on('click','.btnDel',function() {
       console.log($(this).data())
+      var id = $(this).data('id')
+      $.ajax({
+        type: 'get',
+        url: '/delPostById',
+        data: { id: id },
+        success: function (res) {
+          console.log(res)
+        }
+      })
     })
 })
 
