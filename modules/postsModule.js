@@ -74,3 +74,9 @@ exports.delPostById = (id,callback) => {
     }
   })
 }
+
+// 实现文章的新增
+// exports.addPost = (data,callback) =>{
+
+// }
+

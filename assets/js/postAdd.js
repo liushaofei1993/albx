@@ -17,7 +17,7 @@ $(function () {
   // 初始化富文本框: 富文本框通过文本域的指定id值,覆盖文本域,进行替换
   CKEDITOR.replace( 'content' )
 
-  // 获取表单数据,添加文章
+  // 获取文章数据,新增文章
   $('.btnSave').on('click',function(e) {
     e.preventDefault()
 
@@ -31,6 +31,15 @@ $(function () {
 
     // 获取当前表单所有name属性的value值,拼接成 键=值&键=值 的形式
     console.log($('.row').serialize())
+    $.ajax({
+      type: 'post',
+      url: '/addPost',
+      data: $('.row').serialize(),
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+      }
+    })
   })
 
   // 文件上传

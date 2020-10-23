@@ -49,3 +49,25 @@ exports.delPostById = (req,res) =>{
     }
   })
 }
+
+// 实现文章的新增
+exports.addPost = (req,res) =>{
+  // 获取新增的文章数据
+  var obj = req.body
+  console.log(obj)
+  // 调用文章模块中的新增文章方法实现文章的新增
+  // postsModule.addPost(obj,(err,data) =>{
+  //   if(err) {
+  //     res.json({
+  //       code: 400,
+  //       msg: '新增文章失败'
+  //     })
+  //   } else{
+  //     res.json({
+  //       code: 200,
+  //       msg: '新增文章成功',
+  //       data
+  //     })
+  //   }
+  // })
+}
