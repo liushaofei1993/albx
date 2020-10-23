@@ -53,7 +53,12 @@ $(function () {
       contentType: false,   // 不让ajax进行数据的编码,formdata会进行处理
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        // console.log(res)
+        // 判断上传成功与否
+        if(res.code === 200) {
+          // 实现上传文件的预览
+          $('.thumbnail').attr('src','/uploads/' + res.img).show()
+        }
       }
     })
   })
