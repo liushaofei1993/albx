@@ -5,6 +5,8 @@ $(function() {
   // 发起请求,获取文章数据
   init({});
 
+
+
   // 实现文章数据的筛选
   $('.btn-search').on('click',function (e) {
     // 阻止默认行为
@@ -41,6 +43,7 @@ $(function() {
 
   // 数据初始化
   function init (query) {
+    console.log(123)
     $.ajax({
       type: 'get',
       url: '/getPostList',
@@ -83,3 +86,9 @@ $(function() {
     })
   }
 })
+
+  // 根据id实现文章的删除
+  // function delPost(id) {
+  //   alert(id)
+  //   this.init()
+  // }
