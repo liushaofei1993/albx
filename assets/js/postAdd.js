@@ -56,6 +56,8 @@ $(function () {
         // console.log(res)
         // 判断上传成功与否
         if(res.code === 200) {
+          // 先把上传文件名称存储到创建的隐藏域中,便于新增文章时表单内容的获取
+          $('[name=feature]').val(res.img)
           // 实现上传文件的预览
           $('.thumbnail').attr('src','/uploads/' + res.img).show()
         }

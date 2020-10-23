@@ -30,8 +30,11 @@
           <div class="form-group">
             <label for="feature">特色图像</label>
             <!-- show when image chose -->
+            <!-- 添加隐藏域,存储后台返回的上传文件的名称 -->
+            <input type="hidden" name="feature">
             <img class="help-block thumbnail" style="display: none">
-            <input id="feature" class="form-control" name="feature" type="file" multiple>
+            <!-- file形式的input标签就是没有value属性,所以无法通过form的serialize()方法拿到上传文件的名称,解决方案: 添加隐藏域存储上传文件的名称 -->
+            <input id="feature" class="form-control" type="file" multiple>
           </div>
           <div class="form-group">
             <label for="category">所属分类</label>
