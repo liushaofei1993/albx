@@ -41,7 +41,7 @@ $(function() {
 
   // 数据初始化
   function init (query) {
-    console.log(123)
+    console.log(query)
     $.ajax({
       type: 'get',
       url: '/getPostList',
@@ -86,15 +86,19 @@ $(function() {
     // 使用事件委托的方式实现文章的删除
     $('tbody').on('click','.btnDel',function() {
       console.log($(this).data())
-      var id = $(this).data('id')
-      $.ajax({
-        type: 'get',
-        url: '/delPostById',
-        data: { id: id },
-        success: function (res) {
-          console.log(res)
-        }
-      })
+      if (window.confirm('你确定要删除吗?')) {
+        var id = $(this).data('id')
+        $.ajax({
+          type: 'get',
+          url: '/delPostById',
+          data: { id: id },
+          success: function (res) {
+            console.log(res)
+            // 刷新
+            init()
+          }
+        })
+      }
     })
 })
 
