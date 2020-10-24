@@ -1,6 +1,7 @@
 // 1.引入express
 const express = require ('express')
 const querystring = require('querystring')
+var session = require("express-session")
 // 引入ejs
 const ejs = require('ejs')
 // 引入body-parser
@@ -27,15 +28,31 @@ app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+// 使用session实现状态保持
+app.use(session({
+  secret: '什么值无所谓',
+  // 重新保存: 强制会话保存,即使是未修改的.默认为true,但是得写上
+  resave: false,
+  // 强制"未初始化"的会话保存到存储
+  saveUninitialized: false
+}))
+
 // 添加对所有请求的中间件处理函数,实现导航守卫
 app.use(function (req, res, next) {
-  var cookie = querystring.parse(req.headers.cookie)
-  // 判断cookie有无,没有就重定向到登录页,有就进行下一步
-  // 细节: 跳到登录页不重定向,跳到前台页面也不重定向
-  if (cookie.isLogin && cookie.isLogin === 'true' || req.url === '/admin/login' || req.url.indexOf('/admin') === -1) {
-    // next() 之前用户的请求操作
+  // var cookie = querystring.parse(req.headers.cookie)
+  // // 判断cookie有无,没有就重定向到登录页,有就进行下一步
+  // // 细节: 跳到登录页不重定向,跳到前台页面也不重定向
+  // if (cookie.isLogin && cookie.isLogin === 'true' || req.url === '/admin/login' || req.url.indexOf('/admin') === -1) {
+  //   // next() 之前用户的请求操作
+  //   next()
+  // } else {
+  //   res.redirect('/admin/login')
+  // }
+
+  // 使用session实现登陆的状态保持
+  if(req.session.isLogin && req.session.isLogin === 'true' || req.url === '/admin/login' || req.url.indexOf('/admin') === -1) {
     next()
-  } else {
+  } else{
     res.redirect('/admin/login')
   }
 })
