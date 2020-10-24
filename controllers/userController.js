@@ -5,6 +5,7 @@ var userModule = require('../modules/userModule.js')
 
 exports.login = (req,res) =>{
   var obj = req.body
+  console.log(obj)
   // 登录验证应该从数据库中取数据在控制器中进行验证
   userModule.login(obj.email,(err,data) =>{
     if(err) {

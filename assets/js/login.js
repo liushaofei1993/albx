@@ -1,4 +1,5 @@
 $(function () {
+  // 用户登录
   $('.btnLogin').on('click',function (e) {
     e.preventDefault()
     // console.log($('.loginForm').serialize())
@@ -23,7 +24,15 @@ $(function () {
       data: $('.loginForm').serialize(),
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        // console.log(res)
+        if(res.code === 200) {
+          // 跳转
+          location.href = '/admin'
+        } else {
+          // 登录失败提示
+          $('.alert-danger > span').text(res.msg)
+          $('.alert-danger').fadeIn(500).delay(2000).fadeOut(500)
+        }
       }
     })
   })
