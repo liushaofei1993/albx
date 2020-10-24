@@ -54,7 +54,10 @@ exports.delPostById = (req,res) =>{
 exports.addPost = (req,res) =>{
   // 获取新增的文章数据
   var obj = req.body
-  console.log(obj)
+  obj.views = 0,
+  obj.likes = 0,
+  obj.user_id = req.session.currentUser.id
+  console.log(req.session.currentUser)
   // 调用文章模块中的新增文章方法实现文章的新增
   // postsModule.addPost(obj,(err,data) =>{
   //   if(err) {

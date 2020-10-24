@@ -23,7 +23,8 @@ exports.login = (req,res) =>{
 
           // 使用session实现状态保持
           req.session.isLogin = 'true'
-          
+          // 将当前登陆用户的信息存储到session中
+          req.session.currentUser = data
           res.end(JSON.stringify({
             code: 200,
             msg: '登录成功'
