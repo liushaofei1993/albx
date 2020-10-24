@@ -2,6 +2,7 @@
 
 // 引入核心模块
 const fs = require ('fs')
+const querystring = require('querystring')
 
 // 读取前台页面
 // 读取首页
@@ -20,7 +21,14 @@ module.exports.getDetailPage = (req,res) => {
 // 读取后台页面
 // 读取首页
 module.exports.getAdminIndexPage = (req,res) => {
-  res.render('admin/index.ejs')
+  // 判断是否登陆过,没有登陆过就重定向到登录页,登陆过就返回页面
+  var cookie = querystring.parse(req.headers.cookie)
+  if(cookie.isLogin && cookie.isLogin === 'true') {
+    res.render('admin/index.ejs')
+  } else {
+    // 重定向到登录页
+    res.redirect('/admin/login')
+  }
 }
 exports.getCategoriesPage = (req,res) => {
   res.render('admin/categories.ejs')

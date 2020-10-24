@@ -16,10 +16,14 @@ exports.login = (req,res) =>{
     } else {
       if(data) {  // 有没有能够查询到的结果
         if (data.password === obj.password) {
-          res.json({
+          // 在登录成功之后,将登录状态以Set-Cookie的方式返回到客户端
+          res.writeHead(200,{
+            'Set-Cookie': 'isLogin=true'
+          })
+          res.end(JSON.stringify({
             code: 200,
             msg: '登录成功'
-          })
+          }))
         } else{
           res.json({
             code: 400,

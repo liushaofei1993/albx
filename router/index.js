@@ -45,7 +45,7 @@ router.get('/',pagesController.getIndexPage)
       // 3.文件上传
       .post('/uploadFile',uploadController.uploadFile)
 
-      // 4.用户登录
+      // 4.用户登录验证
       .post('/login',userController.login)
 
 module.exports = router
