@@ -39,6 +39,7 @@ router.get('/',pagesController.getIndexPage)
       .get('/delPostById',postsController.delPostById)
       .post('/addPost',postsController.addPost)
       .get('/getPostById',postsController.getPostById)
+      .post('/editPost',postsController.editPost)
 
       // 2.获取所有分类数据
       .get('/getAllCateList',cateController.getAllCateList)

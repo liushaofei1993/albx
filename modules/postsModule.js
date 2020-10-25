@@ -100,3 +100,15 @@ exports.getPostById = (id,callback) => {
   })
 }
 
+// 实现文章的编辑
+exports.editPost = (obj,callback) => {
+  var sql = 'update posts set ? where id = ?'
+  connection.query(sql,[obj,obj.id],(err,results) => {
+    if (err) {
+      callback(err)
+    } else {
+      callback(null)
+    }
+  })
+}
+

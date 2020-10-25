@@ -94,3 +94,24 @@ exports.getPostById = (req,res) => {
     }
   })
 }
+
+// 实现文章的编辑
+exports.editPost = (req,res) =>{
+  // 获取新增的文章数据
+  var obj = req.body
+  console.log(obj)
+  // 调用文章模块中的新增文章方法实现文章的新增
+  postsModule.editPost(obj,(err) =>{
+    if(err) {
+      res.json({
+        code: 400,
+        msg: '编辑文章失败'
+      })
+    } else{
+      res.json({
+        code: 200,
+        msg: '编辑文章成功'
+      })
+    }
+  })
+}
