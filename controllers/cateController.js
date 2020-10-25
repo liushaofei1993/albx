@@ -38,3 +38,21 @@ exports.editCategory = (req,res) => {
     }
   })
 }
+
+// 删除分类数据
+exports.delCategory = (req,res) => {
+  var id = req.query.id
+  cateModule.delCategory(id,(err) => {
+    if(err) {
+      res.json({
+        code: 400,
+        msg: '数据删除失败'
+      })
+    } else {
+      res.json({
+        code: 200,
+        msg: '数据删除成功'
+      })
+    }
+  })
+}

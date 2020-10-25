@@ -35,3 +35,15 @@ exports.editCategory = (obj,callback) => {
     }
   })
 }
+
+// 删除分类数据
+exports.delCategory = (id,callback) => {
+  var sql = 'delete from categories where id = ' + id
+  connection.query(sql,(err) =>{
+    if (err) {
+      callback(err)
+    } else {
+      callback(null)
+    }
+  })
+}

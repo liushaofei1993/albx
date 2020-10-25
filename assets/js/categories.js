@@ -61,4 +61,24 @@ $(function () {
       }
     })
   }
+
+  // 实现分类数据的删除
+  $('tbody').on('click','.btnDel',function (e) {
+    e.preventDefault()
+    // 获取当前分类数据的id
+    var id = $(this).data().id
+    if(confirm('您确定要删除它吗?')) {
+      $.ajax({
+        url: '/delCategory?id=' + id,
+        dataType: 'json',
+        success: function (res) {
+          if(res.code === 200) {
+            $('.alert-danger > span').text(res.msg)
+            $('.alert-danger').fadeIn(500).delay(2000).fadeOut(500)
+            init()
+          }
+        }
+      })
+    }
+  })
 })
