@@ -1,7 +1,7 @@
 // 引入文章数据处理模块
 var postsModule = require('../modules/postsModule.js')
 // 引入moment
-// var moment = require('moment')
+var moment = require('moment')
 // 获取所有文章列表数据
 exports.getPostList = (req,res) =>{
   // 获取分页参数: 因为已经在app.js中引入加配置,所以可以使用下面的方法,这是get请求的方法,post请求时用req.body
@@ -69,6 +69,27 @@ exports.addPost = (req,res) =>{
       res.json({
         code: 200,
         msg: '新增文章成功'
+      })
+    }
+  })
+}
+
+// 根据文章id获取文章数据
+exports.getPostById = (req,res) => {
+  var id = req.query.id
+  postsModule.getPostById(id,(err,data) =>{
+    if (err) {
+      res.json({
+        code:400,
+        msg:'数据获取失败'
+      })
+    } else {
+      // 这里格式化是因为前台表单元素需要的时间格式不是从数据库中拉取的数据的格式
+      data.created = moment(data.created).format('YYYY-MM-DDTHH:mm:ss')
+      res.json({
+        code: 200,
+        msg: '数据获取成功',
+        data:data
       })
     }
   })

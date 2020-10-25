@@ -88,7 +88,26 @@ $(function () {
   if (id) {
     // 要根据ID号获取当前要编辑的文章数据
     $.ajax({
-
+      url: '/getPostById',
+      data: { id },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+        if(res.code === 200) {
+          $('#title').val(res.data.title)
+          $('#content').val(res.data.content)
+          $('#slug').val(res.data.slug)
+          $('.thumbnail').attr('src','/uploads/' + res.data.feature).show()
+          // 细节1: 还需要将图片名称存储到隐藏域中,以便编辑提交时图片名称的获取
+          $('[name=feature]').val(res.data.feature)
+          $('#category').val(res.data.category_id)
+          // 细节3: 返回数据的格式不是表单元素所需要的格式,所以页面展示不显示时间,解决办法: 在后台使用moment格式化从数据库中拉取的数据为前台表单元素所需要的格式
+          $('#created').val(res.data.created)
+          $('#status').val(res.data.status)
+          // 细节2: 还需要将文章id存储到隐藏域中,以便编辑提交时文章id的获取,这个操作需要先添加隐藏域
+          $('[name=id]').val(res.data.id)
+        }
+      }
     })
   }
 })
