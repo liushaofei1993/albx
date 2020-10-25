@@ -37,7 +37,13 @@ $(function () {
       data: $('.row').serialize(),
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        // console.log(res)
+        $('.alert-danger > strong').text('新增成功')
+        $('.alert-danger > span').text(res.msg)
+        $('.alert-danger').fadeIn(500).delay(1000).fadeOut(400)
+        setTimeout(() => {
+          location.href = '/admin/posts'
+        }, 2000);
       }
     })
   })

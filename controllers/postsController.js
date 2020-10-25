@@ -57,20 +57,19 @@ exports.addPost = (req,res) =>{
   obj.views = 0,
   obj.likes = 0,
   obj.user_id = req.session.currentUser.id
-  console.log(req.session.currentUser)
+  console.log(obj)
   // 调用文章模块中的新增文章方法实现文章的新增
-  // postsModule.addPost(obj,(err,data) =>{
-  //   if(err) {
-  //     res.json({
-  //       code: 400,
-  //       msg: '新增文章失败'
-  //     })
-  //   } else{
-  //     res.json({
-  //       code: 200,
-  //       msg: '新增文章成功',
-  //       data
-  //     })
-  //   }
-  // })
+  postsModule.addPost(obj,(err) =>{
+    if(err) {
+      res.json({
+        code: 400,
+        msg: '新增文章失败'
+      })
+    } else{
+      res.json({
+        code: 200,
+        msg: '新增文章成功'
+      })
+    }
+  })
 }

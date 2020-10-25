@@ -76,7 +76,14 @@ exports.delPostById = (id,callback) => {
 }
 
 // 实现文章的新增
-// exports.addPost = (data,callback) =>{
-
-// }
+exports.addPost = (data,callback) =>{
+  var sql = `insert into posts set ?`
+  connection.query(sql,[data],(err,results) => {
+    if (err) {
+      callback(err)
+    } else {
+      callback(null)
+    }
+  })
+}
 
