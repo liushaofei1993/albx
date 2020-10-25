@@ -7,14 +7,14 @@
         <h1>分类目录</h1>
       </div>
       <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
-        <strong>错误！</strong>发生XXX错误
-      </div> -->
+      <div class="alert alert-danger" style="display: none">
+        <strong>操作成功</strong><span>发生XXX错误</span>
+      </div>
       <div class="row">
         <div class="col-md-4">
-          <form>
+          <form id="cateForm">
             <input type="hidden" name="id">
-            <h2>添加新分类目录</h2>
+            <h2 id="prompt">添加新的分类目录</h2>
             <div class="form-group">
               <label for="name">名称</label>
               <input id="name" class="form-control" name="name" type="text" placeholder="分类名称">
@@ -25,7 +25,8 @@
               <p class="help-block">https://zce.me/category/<strong>slug</strong></p>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" type="submit">添加</button>
+              <button class="btn btn-primary addCategory" type="submit">添加</button>
+              <button class="btn btn-primary editCategory" type="submit" style="display: none">编辑</button>
             </div>
           </form>
         </div>

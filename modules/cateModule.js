@@ -23,3 +23,15 @@ exports.getAllCateList = (callback) => {
     }
   })
 }
+
+// 编辑分类数据
+exports.editCategory = (obj,callback) => {
+  var sql = 'update categories set ? where id = ?'
+  connection.query(sql,[obj,obj.id],(err) =>{
+    if (err) {
+      callback(err)
+    } else {
+      callback(null)
+    }
+  })
+}

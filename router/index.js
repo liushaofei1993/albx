@@ -43,6 +43,7 @@ router.get('/',pagesController.getIndexPage)
 
       // 2.获取所有分类数据
       .get('/getAllCateList',cateController.getAllCateList)
+      .post('/editCategory',cateController.editCategory)
 
       // 3.文件上传
       .post('/uploadFile',uploadController.uploadFile)
