@@ -5,48 +5,20 @@ $(function () {
     dataType: 'json',
     success: function (res) {
       console.log(res)
-      // 生成分类数据的动态结构
-      var html = ''
-      for(var i=0;i<res.data.length;i++){
-        html += `<option value="${res.data[i].id}">${res.data[i].name}</option>`
+      if(res.code === 200) {
+        // 生成分类数据的动态结构
+        var html = ''
+        for(var i=0;i<res.data.length;i++){
+          html += `<option value="${res.data[i].id}">${res.data[i].name}</option>`
+        }
+        $('#category').html(html)
       }
-      $('#category').html(html)
     }
   })
 
   // 初始化富文本框: 富文本框通过文本域的指定id值,覆盖文本域,进行替换
   CKEDITOR.replace( 'content' )
 
-  // 获取文章数据,新增文章
-  $('.btnSave').on('click',function(e) {
-    e.preventDefault()
-
-    // 获取富文本框的值: 有两种方式: 第一种推荐,第二种需要和serialize拼接,数据多了,拼接就非常麻烦!
-    // 1. 这种方式是将富文本框的数据与文本域进行同步,非常方便后期参数的获取
-    CKEDITOR.instances.content.updateElement()
-
-    // // 2. CKEDITOR.instances: 是由replace方法所创建的CKEDITOR的所有实例对象,包含了所有的富文本框,通过getDate方法可以获取值
-    // var data = CKEDITOR.instances.content.getData()
-    // console.log(data) // <p>富文本框中的内容</p>
-
-    // 获取当前表单所有name属性的value值,拼接成 键=值&键=值 的形式
-    console.log($('.row').serialize())
-    $.ajax({
-      type: 'post',
-      url: '/addPost',
-      data: $('.row').serialize(),
-      dataType: 'json',
-      success: function (res) {
-        // console.log(res)
-        $('.alert-danger > strong').text('新增成功')
-        $('.alert-danger > span').text(res.msg)
-        $('.alert-danger').fadeIn(500).delay(1000).fadeOut(400)
-        setTimeout(() => {
-          location.href = '/admin/posts'
-        }, 2000);
-      }
-    })
-  })
 
   // 文件上传
   $('#feature').on('change',function () {
@@ -84,6 +56,9 @@ $(function () {
   // 获取一个不存在的对象--报错: 对象未定义
   // 获取一个对象不存在的属性--仅仅是返回undefined
   var id = common.getRouterParams(location.search).id
+
+  // 修改提示文本
+  id ? $('.page-title > h1').text('编辑文章') : $('.page-title > h1').text('写文章')
   // 有就是编辑文章,需要拉取文章数据,做一个默认展示,没有就是新增文章,执行上面的分类数据展示即可
   if (id) {
     // 要根据ID号获取当前要编辑的文章数据
@@ -110,4 +85,50 @@ $(function () {
       }
     })
   }
+
+    // 获取文章数据,新增文章
+    $('.btnSave').on('click',function(e) {
+      e.preventDefault()
+  
+      // 获取富文本框的值: 有两种方式: 第一种推荐,第二种需要和serialize拼接,数据多了,拼接就非常麻烦!
+      // 1. 这种方式是将富文本框的数据与文本域进行同步,非常方便后期参数的获取
+      CKEDITOR.instances.content.updateElement()
+  
+      // // 2. CKEDITOR.instances: 是由replace方法所创建的CKEDITOR的所有实例对象,包含了所有的富文本框,通过getDate方法可以获取值
+      // var data = CKEDITOR.instances.content.getData()
+      // console.log(data) // <p>富文本框中的内容</p>
+  
+      // 获取当前表单所有name属性的value值,拼接成 键=值&键=值 的形式
+      // console.log($('.row').serialize())
+
+      // 判断有无id,编辑还是新增
+      if (id) {
+        opt('/editPost')
+      } else {
+        opt('/addPost')
+      }
+
+    })
+
+    // 封装一个功能: 点击保存时添加文章数据到数据库
+    function opt(url) {
+      $.ajax({
+        type: 'post',
+        url: url,
+        data: $('.row').serialize(),
+        dataType: 'json',
+        success: function (res) {
+          // console.log(res)
+          if(res.code === 200) {
+            $('.alert-danger > strong').text('新增成功')
+            $('.alert-danger > span').text(res.msg)
+            $('.alert-danger').fadeIn(500).delay(1000).fadeOut(400)
+            setTimeout(() => {
+              location.href = '/admin/posts'
+            }, 2000);
+          }
+        }
+      })
+    }
+  
 })
