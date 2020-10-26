@@ -33,14 +33,10 @@ $(function () {
   // 编辑按钮,提交分类数据
   $('.editCategory').on('click',function (e) {
     e.preventDefault()
-    opt('/editCategory')
-  })
-
-  // 封装一个功能: 添加或编辑分类数据
-  function opt (url) {
+    // 不再封装了,和新增有些差异
     $.ajax({
       type: 'post',
-      url: url,
+      url: '/editCategory',
       data: $('#cateForm').serialize(),
       success: function (res) {
         console.log(res)
@@ -55,12 +51,14 @@ $(function () {
           // 清空分类表单信息
           $('#name').val('')
           $('#slug').val('')
+          $('[name=id]').val('')
           // 刷新
           init()
         }
       }
     })
-  }
+  })
+
 
   // 实现分类数据的删除
   $('tbody').on('click','.btnDel',function (e) {
@@ -144,5 +142,28 @@ $(function () {
       }
     })
   })
+
+  // 新增分类数据
+   $('.addCategory').on('click',function (e) {
+    e.preventDefault()
+    $.ajax({
+      type: 'post',
+      url: '/addCategory',
+      data: $('#cateForm').serialize(),
+      dataType: 'json',
+      success: function (res) {
+        if(res.code === 200) {
+          // 提示信息
+          $('.alert-danger > span').text(res.msg)
+          $('.alert-danger').fadeIn(500).delay(2000).fadeOut(500)
+          // 清空分类表单信息
+          $('#name').val('')
+          $('#slug').val('')
+          // 刷新
+          init()
+        }
+      }
+    })
+   })
 
 })

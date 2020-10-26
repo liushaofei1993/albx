@@ -47,3 +47,15 @@ exports.delCategory = (id,callback) => {
     }
   })
 }
+
+// 新增分类数据
+exports.addCategory = (obj,callback) => {
+  var sql = 'insert into categories values(null,?,?)'
+  connection.query(sql,[obj.slug,obj.name],(err) =>{
+    if (err) {
+      callback(err)
+    } else {
+      callback(null)
+    }
+  })
+}

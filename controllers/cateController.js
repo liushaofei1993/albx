@@ -56,3 +56,21 @@ exports.delCategory = (req,res) => {
     }
   })
 }
+
+// 新增分类数据
+exports.addCategory = (req,res) => {
+  var obj = req.body
+  cateModule.addCategory(obj,(err) => {
+    if(err) {
+      res.json({
+        code: 400,
+        msg: '数据新增失败'
+      })
+    } else {
+      res.json({
+        code: 200,
+        msg: '数据新增成功'
+      })
+    }
+  })
+}
