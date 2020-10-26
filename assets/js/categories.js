@@ -91,4 +91,24 @@ $(function () {
     $('tbody').find('.chkSinger').prop('checked',statu)
   })
 
+  // 2.当复选框选中的数量大于1时,显示批量删除按钮
+  $('tbody').on('change','.chkSinger',function () {
+    // 获取当前所有的复选框数量,为了与被选中的做比较
+    var total= $('tbody').find('.chkSinger').length
+    // 获取当前被选中的复选框的数量:使用了伪类选择器
+    var cnt = $('tbody').find('.chkSinger:checked').length
+    // 判断当前被选中的复选框的数量,大于1,就显示批量删除
+    if(cnt > 1) {
+      $('.btnDels').show(500)
+    } else{
+      $('.btnDels').hide(500)
+    }
+    // 判断当前选中的复选框数量是否等于总的复选框数量,等于就修改全选框的状态
+    if (cnt === total) {
+      $('.chkAll').prop('checked',true)
+    } else{
+      $('.chkAll').prop('checked',false)
+    }
+  })
+
 })
