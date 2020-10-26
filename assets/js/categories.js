@@ -81,4 +81,14 @@ $(function () {
       })
     }
   })
+  
+  // 页面操作功能
+  // 1.全选全不选
+  $('.chkAll').on('change',function () {
+    // 取全选复选框的checked属性值
+    var statu = $('.chkAll').prop('checked')
+    // 将tbody中所有复选框的checked属性值赋值为上面刚取到的的属性值
+    $('tbody').find('.chkSinger').prop('checked',statu)
+  })
+
 })
