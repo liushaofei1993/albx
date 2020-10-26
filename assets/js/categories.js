@@ -89,6 +89,14 @@ $(function () {
     var statu = $('.chkAll').prop('checked')
     // 将tbody中所有复选框的checked属性值赋值为上面刚取到的的属性值
     $('tbody').find('.chkSinger').prop('checked',statu)
+    // 获取当前被选中的复选框的数量:使用了伪类选择器
+    var cnt = $('tbody').find('.chkSinger:checked').length
+    // 判断当前被选中的复选框的数量,大于1,就显示批量删除
+    if(cnt > 1) {
+      $('.btnDels').show(500)
+    } else{
+      $('.btnDels').hide(500)
+    }
   })
 
   // 2.当复选框选中的数量大于1时,显示批量删除按钮
@@ -109,6 +117,32 @@ $(function () {
     } else{
       $('.chkAll').prop('checked',false)
     }
+  })
+
+  // 批量删除业务
+  $('.btnDels').on('click',function () {
+    // 获取所有被选中的复选框的id值
+    // 先获取所有被选中的对象
+    var allCheck = $('tbody').find('.chkSinger:checked')
+    // 遍历数组获取所有id
+    var arr = []
+    for(var i=0;i<allCheck.length;i++){
+      arr.push($(allCheck[i]).data('id'))
+    }
+    // 发送请求
+    $.ajax({
+      type: 'get',
+      url: '/delCategory',
+      data: {id: arr.join(',')},
+      dataType: 'json',
+      success: function (res) {
+        if (res.code === 200) {
+          $('.alert-danger > span').text(res.msg)
+          $('.alert-danger').fadeIn(500).delay(2000).fadeOut(500)
+          init()
+        }
+      }
+    })
   })
 
 })

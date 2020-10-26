@@ -60,7 +60,7 @@
   <script type="text/template" id="cateTemp">
     {{each data as value index}}
       <tr>
-        <td class="text-center"><input type="checkbox" class="chkSinger"></td>
+        <td class="text-center"><input type="checkbox" class="chkSinger" data-id="{{value.id}}"></td>
         <td>{{value.name}}</td>
         <td>{{value.slug}}</td>
         <td class="text-center">

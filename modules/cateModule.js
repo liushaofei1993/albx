@@ -38,7 +38,7 @@ exports.editCategory = (obj,callback) => {
 
 // 删除分类数据
 exports.delCategory = (id,callback) => {
-  var sql = 'delete from categories where id = ' + id
+  var sql = `delete from categories where id in (${id})`
   connection.query(sql,(err) =>{
     if (err) {
       callback(err)
