@@ -57,5 +57,7 @@ router.get('/',pagesController.getIndexPage)
       // 与options表相关的业务处理
       // 添加导航菜单
       .post('/addMenu',optionsController.addMenu)
+      // 获取网站设置信息
+      .get('/getSiteInfo',optionsController.getSiteInfo)
 
 module.exports = router

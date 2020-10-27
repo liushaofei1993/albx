@@ -28,3 +28,15 @@ connection.query(sql,(err,results) => {
   }
 })
 }
+
+// 获取网站设置信息
+exports.getSiteInfo = (callback) => {
+  var sql = 'select value from `options` where id < 9'
+  connection.query(sql,(err,results) => {
+    if(err) {
+      callback(err)
+    } else {
+      callback(null,results)
+    }
+  })
+}

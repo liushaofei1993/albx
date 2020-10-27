@@ -20,3 +20,21 @@ exports.addMenu = (req,res) => {
     }
   })
 }
+
+// 获取网站设置信息
+exports.getSiteInfo = (req,res) => {
+  optionsModule.getSiteInfo((err,data) => {
+    if(err){
+      res.json({
+        code: 400,
+        msg: '数据获取失败'
+      })
+    } else {
+      res.json({
+        code: 200,
+        msg: '数据获取成功',
+        data
+      })
+    }
+  })
+}
