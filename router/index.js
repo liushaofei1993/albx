@@ -8,6 +8,7 @@ const postsController = require('../controllers/postsController.js')
 const cateController = require('../controllers/cateController.js')
 const uploadController = require('../controllers/uploadController.js')
 const userController = require('../controllers/userController.js')
+const optionsController = require('../controllers/optionsController.js')
 // 创建路由中间件
 const router = express.Router()
 // 使用路由中间件
@@ -52,5 +53,9 @@ router.get('/',pagesController.getIndexPage)
 
       // 4.用户登录验证
       .post('/login',userController.login)
+
+      // 与options表相关的业务处理
+      // 添加导航菜单
+      .post('/addMenu',optionsController.addMenu)
 
 module.exports = router
