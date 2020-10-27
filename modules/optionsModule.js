@@ -18,7 +18,7 @@ connection.query(sql,(err,results) => {
     var str = JSON.stringify(arr)
     // 5.更新数据
     var sql = 'update options set value = ? where id = 9 '
-    connection.query(sql,(err1) => {
+    connection.query(sql,[str],(err1) => {
       if(err1) {
         callback(err1)
       } else {

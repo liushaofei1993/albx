@@ -5,6 +5,7 @@ const optionsModule = require('../modules/optionsModule.js')
 // 添加导航菜单项
 exports.addMenu = (req,res) => {
   var obj = req.body
+  obj.icon = 'fa fa-glass'
   optionsModule.addMenu(obj,(err) => {
     if(err){
       res.json({
