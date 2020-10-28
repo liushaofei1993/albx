@@ -55,7 +55,7 @@ $(function () {
   // 判断当前路由有没有参数,就是当前可能存在的pid值
   // 获取一个不存在的对象--报错: 对象未定义
   // 获取一个对象不存在的属性--仅仅是返回undefined
-  var id = common.getRouterParams(location.search).id
+  var id = common.getStringToObj(location.search).id
 
   // 修改提示文本
   id ? $('.page-title > h1').text('编辑文章') : $('.page-title > h1').text('写文章')

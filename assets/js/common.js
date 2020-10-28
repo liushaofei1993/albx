@@ -15,7 +15,7 @@ var common = {
   },
 
   // 获取当前路由中的参数
-  getRouterParams: (search) =>{
+  getStringToObj: (search) =>{
     var obj = {}
     // 获取到路径后面的参数部分: location.search = "?id=1&name=wang"
     // 去掉?
