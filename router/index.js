@@ -59,5 +59,7 @@ router.get('/',pagesController.getIndexPage)
       .post('/addMenu',optionsController.addMenu)
       // 获取网站设置信息
       .get('/getSiteInfo',optionsController.getSiteInfo)
+      // 更新网站设置信息
+      .post('/updateSiteInfo',optionsController.updateSiteInfo)
 
 module.exports = router
