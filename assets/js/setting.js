@@ -26,13 +26,15 @@ $(function () {
     $.ajax({
       type: 'post',
       url: '/updateSiteInfo',
-      data: JSON.stringify(obj),
+      data: obj,
       dataType: 'json',
       success: function (res) {
+        console.log(res)
         if(res.code === 200) {
           init()
         }
       }
     })
   })
+
 })

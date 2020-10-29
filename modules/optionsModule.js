@@ -48,16 +48,15 @@ exports.updateSiteInfo = (obj,callback) => {
   for(var key in obj){
     var sql = 'update options set value = ? where `key` = ?'
     connection.query(sql,[obj[key],key],(err) => {
-      console.log(sql)
       if(err) {
         callback(err)
         return
       } else {
         cnt ++
       }
+      if (cnt === 7) {
+        callback(null)
+      }
     })
-  }
-  if (cnt === 7) {
-    callback(null)
   }
 }

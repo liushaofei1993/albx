@@ -42,16 +42,17 @@ exports.getSiteInfo = (req,res) => {
 // 更新网站设置信息
 exports.updateSiteInfo = (req,res) => {
   var obj = req.body
+  console.log(obj)
   optionsModule.updateSiteInfo(obj,(err) => {
     if(err){
       res.json({
         code: 400,
-        msg: '网站信息设置失败'
+        msg: '网站信息更新失败'
       })
     } else {
       res.json({
         code: 200,
-        msg: '网站信息设置成功'
+        msg: '网站信息更新成功'
       })
     }
   })
