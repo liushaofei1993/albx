@@ -46,15 +46,16 @@ exports.updateSiteInfo = (obj,callback) => {
   var cnt = 0
   // 构建sql语句
   for(var key in obj){
-    var sql = 'update options set value = ? where `key` = ?'
-    connection.query(sql,[obj[key],key],(err) => {
+    var sql = `update options set value = '${obj[key]}' where ` + '`key`' + ` = '${key}'`
+    console.log(sql)
+    connection.query(sql,(err) => {
       if(err) {
         callback(err)
         return
       } else {
         cnt ++
       }
-      if (cnt === 7) {
+      if (cnt == 7) {
         callback(null)
       }
     })

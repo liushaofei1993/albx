@@ -7,9 +7,9 @@
         <h1>网站设置</h1>
       </div>
       <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
-        <strong>错误！</strong>发生XXX错误
-      </div> -->
+      <div class="alert alert-danger" style="display: none">
+        <strong>操作成功</strong><span>发生XXX错误</span>
+      </div>
       <form class="form-horizontal">
         
       </form>
@@ -22,7 +22,7 @@
 
   <script type="text/template" id="siteInfoTemp">
     <!-- 这里加隐藏域只是因为页面中没有底部结构,而更新网站信息时后台options表中又需要site_footer的值,无奈之举 -->
-    <input type="hidden" name="site_footer" value="{{data[5].value}}">
+    <input type="hidden" name="site_footer" id="site_footer" value="{{data[5].value}}">
     <div class="form-group">
       <label for="site_logo" class="col-sm-2 control-label">网站图标</label>
       <div class="col-sm-6">
